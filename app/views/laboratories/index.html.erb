@@ -1,0 +1,27 @@
+<div class="container">
+  <h1 class="text-center"> Laboratories </h1>
+  <article>
+    <table class="table table-bordered table-responsive">
+      <thead>
+          <tr>
+            <th>LABORATORY</th>
+            <th>DELETE</th>
+            <th>EDIT</th>
+            <th>VIEW</th>
+          </tr>
+    </thead>
+  <tbody>
+      <% @laboratories.each do |l| %>
+      <tr>
+        <td class="col-sm-2"><strong><%= l.name %></strong></td>
+        <td class="col-sm-2"><a href="<%= laboratory_path(l.id) %>" data-method="delete" class="btn btn-danger"> Delete </a></td>
+        <td class="col-sm-2"> <a href="<%= edit_laboratory_path(l.id)%>" class="btn btn-success"> Edit</a> </td>
+        <td class="col-sm-2"> <a href="<%= laboratory_path(l.id)%>" class="btn btn-info">View</a></td>
+
+      </tr>
+         <% end if @laboratories.any?%>
+      </tbody>
+      </table>
+
+  </article>
+</div>

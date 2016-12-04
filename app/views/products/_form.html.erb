@@ -1,0 +1,51 @@
+<% form_name ||= "Manage" %>
+<h1 class="text-center"> <%= form_name %> product </h1>
+
+  <% if @product.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@product.errors.count, "error") %> prohibited
+      this article from being saved:
+    </h2>
+    <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+<div class="container">
+  <%= form_for @product do |pr| %>
+    <!--Name-->
+    <div class="form-group">
+      <%= pr.label :name %>
+      <%= pr.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="row">
+      <!--Price-->
+      <div class="col-sm-4 form-group">
+        <%= pr.label :price %>
+        <%= pr.number_field :price, class: "form-control" %>
+      </div>
+      <!--Select Laboratory-->
+      <div class="col-sm-4 form-group">
+        <%= pr.label :laboratory %><br>
+        <select name="product[laboratory_id]" class="selectpicker">
+          <%= @laboratories.each do |l|  %>
+              <option value="<%= l.id %>"> <%= l.name %> </option>
+          <% end  %>
+        </select>
+      </div>
+      <!--Avatar Product-->
+      <div class="col-sm-4 form-group">
+        <%= pr.label :avatar %>
+        <%= pr.file_field :avatar, class: "form-control" %>
+      </div>
+    </div>
+    <%= pr.submit "#{form_name} product", class:"btn btn-primary" %>
+    <a class="btn btn-default" href="<%= products_path %>" > View all products </a>
+
+  <% end %>
+</div>
